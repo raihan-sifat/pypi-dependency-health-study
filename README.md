@@ -2,7 +2,7 @@
 
 **An Empirical Study of Maintenance Risk in Critical PyPI Dependencies**
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23007343.svg)](https://doi.org/10.5281/zenodo.23007343)
 
 ## Abstract
 

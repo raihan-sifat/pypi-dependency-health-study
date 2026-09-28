@@ -4,7 +4,7 @@
 Independent Researcher  
 Dhaka, Bangladesh  
 GitHub: [https://github.com/raihan-sifat](https://github.com/raihan-sifat)  
-Zenodo DOI: [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)
+Zenodo DOI: [10.5281/zenodo.23007343](https://doi.org/10.5281/zenodo.23007343)
 
 ---
 
@@ -256,7 +256,7 @@ Future research will extend this methodology to dynamic runtime tracing to obser
 To enable exact replication, all data collection scripts, resolved dependency graphs, classified datasets, and high-resolution figures have been open-sourced and archived:
 
 - **GitHub Repository:** [https://github.com/raihan-sifat/pypi-dependency-health-study](https://github.com/raihan-sifat/pypi-dependency-health-study)
-- **Zenodo Archive & Permanent DOI:** [https://doi.org/10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)
+- **Zenodo Archive & Permanent DOI:** [https://doi.org/10.5281/zenodo.23007343](https://doi.org/10.5281/zenodo.23007343)
 
 ---
 
