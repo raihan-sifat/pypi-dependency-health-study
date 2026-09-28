@@ -1,213 +1,401 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Silent Abandonment in the Python Ecosystem</title>
-<style>
-  body {
-    font-family: 'Times New Roman', Times, serif;
-    line-height: 1.5;
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
-    color: #111;
-  }
-  h1 {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  .authors {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 15px;
-  }
-  .abstract-box {
-    margin: 20px 40px;
-    padding: 15px;
-    background: #fdfdfd;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    font-size: 14px;
-    text-align: justify;
-  }
-  .abstract-title {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 13px;
-  }
-  h2 {
-    font-size: 18px;
-    border-bottom: 1px solid #000;
-    padding-bottom: 4px;
-    margin-top: 30px;
-    text-transform: uppercase;
-  }
-  h3 {
-    font-size: 15px;
-    margin-top: 18px;
-  }
-  p {
-    text-align: justify;
-    font-size: 15px;
-    margin-bottom: 12px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 14px;
-  }
-  th, td {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding: 8px 12px;
-    text-align: left;
-  }
-  th {
-    border-top: 2px solid #000;
-    border-bottom: 1px solid #000;
-    background: #fafafa;
-  }
-  .table-title {
-    font-weight: bold;
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-  }
-  .figure-box {
-    text-align: center;
-    margin: 25px 0;
-  }
-  .figure-box img {
-    max-width: 90%;
-    height: auto;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-  }
-  .figure-caption {
-    font-size: 13px;
-    font-style: italic;
-    margin-top: 6px;
-    color: #444;
-  }
-  .callout {
-    background: #f7f9fa;
-    border-left: 4px solid #0056b3;
-    padding: 10px 16px;
-    margin: 15px 0;
-    font-style: italic;
-  }
-  @media print {
-    body { max-width: 100%; margin: 0; padding: 15mm; }
-  }
-</style>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Silent Abandonment in the Python Ecosystem</title>
+        <style>
+            body {
+                font-family: "Times New Roman", Times, serif;
+                line-height: 1.5;
+                max-width: 900px;
+                margin: 40px auto;
+                padding: 0 20px;
+                color: #111;
+            }
+            h1 {
+                font-size: 24px;
+                text-align: center;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+            .authors {
+                text-align: center;
+                margin-bottom: 25px;
+                font-size: 15px;
+            }
+            .abstract-box {
+                margin: 20px 40px;
+                padding: 15px;
+                background: #fdfdfd;
+                border-top: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+                font-size: 14px;
+                text-align: justify;
+            }
+            .abstract-title {
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 13px;
+            }
+            h2 {
+                font-size: 18px;
+                border-bottom: 1px solid #000;
+                padding-bottom: 4px;
+                margin-top: 30px;
+                text-transform: uppercase;
+            }
+            h3 {
+                font-size: 15px;
+                margin-top: 18px;
+            }
+            p {
+                text-align: justify;
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+                font-size: 14px;
+            }
+            th,
+            td {
+                border-top: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                padding: 8px 12px;
+                text-align: left;
+            }
+            th {
+                border-top: 2px solid #000;
+                border-bottom: 1px solid #000;
+                background: #fafafa;
+            }
+            .table-title {
+                font-weight: bold;
+                margin-top: 15px;
+                text-align: center;
+                font-size: 14px;
+            }
+            .figure-box {
+                text-align: center;
+                margin: 25px 0;
+            }
+            .figure-box img {
+                max-width: 90%;
+                height: auto;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+            }
+            .figure-caption {
+                font-size: 13px;
+                font-style: italic;
+                margin-top: 6px;
+                color: #444;
+            }
+            .callout {
+                background: #f7f9fa;
+                border-left: 4px solid #0056b3;
+                padding: 10px 16px;
+                margin: 15px 0;
+                font-style: italic;
+            }
+            @media print {
+                body {
+                    max-width: 100%;
+                    margin: 0;
+                    padding: 15mm;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            Silent Abandonment in the Python Ecosystem:<br />An Empirical Study
+            of Maintenance Risk in Critical PyPI Dependencies
+        </h1>
 
-<h1>Silent Abandonment in the Python Ecosystem:<br>An Empirical Study of Maintenance Risk in Critical PyPI Dependencies</h1>
+        <div class="authors">
+            <strong>Sifat Raihan</strong><br />
+            Independent Researcher &bull; Dhaka, Bangladesh<br />
+            GitHub:
+            <a href="https://github.com/raihan-sifat"
+                >github.com/raihan-sifat</a
+            >
+            &bull; Zenodo DOI: <code>10.5281/zenodo.XXXXXXX</code>
+        </div>
 
-<div class="authors">
-  <strong>Sifat Raihan</strong><br>
-  Independent Researcher &bull; Dhaka, Bangladesh<br>
-  GitHub: <a href="https://github.com/raihan-sifat">github.com/raihan-sifat</a> &bull; Zenodo DOI: <code>10.5281/zenodo.XXXXXXX</code>
-</div>
+        <div class="abstract-box">
+            <span class="abstract-title">Abstract</span>—Modern software systems
+            rely extensively on open-source package repositories to accelerate
+            feature delivery. However, this deep web of transitive dependencies
+            introduces severe supply chain vulnerabilities when upstream
+            packages are abandoned without formal deprecation—a phenomenon
+            termed <em>silent abandonment</em>. In this empirical study, we
+            analyze the top 1,000 most-downloaded packages on the Python Package
+            Index (PyPI) and resolve their complete direct and transitive
+            dependency graphs, comprising 1,303 unique packages and 3,022
+            dependency relations. We evaluate maintainer topology, release
+            cadence, and known security advisories queried from the Open Source
+            Vulnerabilities (OSV) database. Our investigation yields three key
+            empirical findings: (1)
+            <strong>Pervasive Bus Factor Fragility (RQ1):</strong> 75.9%
+            (989/1,303) of dependencies in the critical Python ecosystem rely on
+            a single maintainer, demonstrating acute bus factor vulnerability
+            across foundational libraries. (2)
+            <strong>Prevalence of Silent Abandonment (RQ2):</strong> 14.2%
+            (185/1,303) of packages have had zero release activity for over 18
+            months, while an additional 66.1% (861/1,303) exhibit elevated
+            maintenance risk due to single-maintainer concentration or prolonged
+            dormancy. (3)
+            <strong
+                >Statistical Association with Security Advisories (RQ3):</strong
+            >
+            We identify 206 packages harboring documented vulnerabilities. A
+            Chi-Square test of independence reveals a statistically significant
+            association between maintenance status and vulnerability disclosure
+            (&chi;<sup>2</sup> = 8.0513, <em>p</em> = 0.00455, &alpha; = 0.01).
+            Logistic regression demonstrates that silently abandoned packages
+            suffer from a systematic reporting blindspot compared to actively
+            maintained projects. All datasets, collection pipelines, and
+            analytical scripts are made openly available.
+        </div>
 
-<div class="abstract-box">
-  <span class="abstract-title">Abstract</span>—Modern software systems rely extensively on open-source package repositories to accelerate feature delivery. However, this deep web of transitive dependencies introduces severe supply chain vulnerabilities when upstream packages are abandoned without formal deprecation—a phenomenon termed <em>silent abandonment</em>. In this empirical study, we analyze the top 1,000 most-downloaded packages on the Python Package Index (PyPI) and resolve their complete direct and transitive dependency graphs, comprising 1,303 unique packages and 3,022 dependency relations. We evaluate maintainer topology, release cadence, and known security advisories queried from the Open Source Vulnerabilities (OSV) database. Our investigation yields three key empirical findings: (1) <strong>Pervasive Bus Factor Fragility (RQ1):</strong> 75.9% (989/1,303) of dependencies in the critical Python ecosystem rely on a single maintainer, demonstrating acute bus factor vulnerability across foundational libraries. (2) <strong>Prevalence of Silent Abandonment (RQ2):</strong> 14.2% (185/1,303) of packages have had zero release activity for over 18 months, while an additional 66.1% (861/1,303) exhibit elevated maintenance risk due to single-maintainer concentration or prolonged dormancy. (3) <strong>Statistical Association with Security Advisories (RQ3):</strong> We identify 206 packages harboring documented vulnerabilities. A Chi-Square test of independence reveals a statistically significant association between maintenance status and vulnerability disclosure (&chi;<sup>2</sup> = 8.0513, <em>p</em> = 0.00455, &alpha; = 0.01). Logistic regression demonstrates that silently abandoned packages suffer from a systematic reporting blindspot compared to actively maintained projects. All datasets, collection pipelines, and analytical scripts are made openly available.
-</div>
+        <h2>I. Introduction</h2>
+        <p>
+            Contemporary software engineering is defined by component reuse.
+            Developers rarely build functionality from scratch; instead, they
+            compose systems using package managers such as npm, Maven, and the
+            Python Package Index (PyPI). The Python ecosystem powers modern
+            machine learning, data engineering, cloud infrastructure, and
+            enterprise web APIs, serving tens of billions of downloads every
+            month.
+        </p>
+        <p>
+            However, this reliance on open-source libraries exposes systems to
+            software supply chain risk. While security research often focuses on
+            malicious injections (such as typosquatting and protestware), an
+            equally pervasive yet insidious hazard is
+            <strong>silent abandonment</strong>. Silent abandonment occurs when
+            a library's maintainer ceases active maintenance, bug fixing, and
+            security reviews without formally deprecating the package.
+            Downstream systems continue to import these libraries, unaware that
+            security advisories will remain unpatched and breaking changes will
+            go unaddressed.
+        </p>
 
-<h2>I. Introduction</h2>
-<p>Contemporary software engineering is defined by component reuse. Developers rarely build functionality from scratch; instead, they compose systems using package managers such as npm, Maven, and the Python Package Index (PyPI). The Python ecosystem powers modern machine learning, data engineering, cloud infrastructure, and enterprise web APIs, serving tens of billions of downloads every month.</p>
-<p>However, this reliance on open-source libraries exposes systems to software supply chain risk. While security research often focuses on malicious injections (such as typosquatting and protestware), an equally pervasive yet insidious hazard is <strong>silent abandonment</strong>. Silent abandonment occurs when a library's maintainer ceases active maintenance, bug fixing, and security reviews without formally deprecating the package. Downstream systems continue to import these libraries, unaware that security advisories will remain unpatched and breaking changes will go unaddressed.</p>
+        <h2>II. Empirical Study Design</h2>
+        <p>
+            We designed and executed an empirical mining pipeline across 1,303
+            packages and 3,022 dependency edges:
+        </p>
+        <ul>
+            <li>
+                <strong>Root Sampling:</strong> 1,000 top packages from
+                standardized 30-day PyPI metrics.
+            </li>
+            <li>
+                <strong>Dependency Graph Resolution:</strong> PEP 508 parsing of
+                direct and transitive dependencies up to depth 2.
+            </li>
+            <li>
+                <strong>Activity & Authorship Telemetry:</strong> Historical
+                release cadence, repository archiving, and maintainer entities.
+            </li>
+            <li>
+                <strong>Vulnerability Ingestion:</strong> Querying OSV.dev
+                (GHSA, CVE, PYSEC databases).
+            </li>
+        </ul>
 
-<h2>II. Empirical Study Design</h2>
-<p>We designed and executed an empirical mining pipeline across 1,303 packages and 3,022 dependency edges:</p>
-<ul>
-  <li><strong>Root Sampling:</strong> 1,000 top packages from standardized 30-day PyPI metrics.</li>
-  <li><strong>Dependency Graph Resolution:</strong> PEP 508 parsing of direct and transitive dependencies up to depth 2.</li>
-  <li><strong>Activity & Authorship Telemetry:</strong> Historical release cadence, repository archiving, and maintainer entities.</li>
-  <li><strong>Vulnerability Ingestion:</strong> Querying OSV.dev (GHSA, CVE, PYSEC databases).</li>
-</ul>
+        <h2>III. Empirical Results</h2>
 
-<h2>III. Empirical Results</h2>
+        <div class="table-title">
+            TABLE I: High-Level Ecosystem Health Metrics
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Total Packages Investigated</strong></td>
+                    <td>1,303</td>
+                    <td>100.0%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Total Dependency Relations Resolved</strong>
+                    </td>
+                    <td>3,022</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><strong>Single-Maintainer Packages</strong></td>
+                    <td>989</td>
+                    <td><strong>75.9%</strong></td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Multi-Developer / Org-Backed Packages</strong>
+                    </td>
+                    <td>314</td>
+                    <td>24.1%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong
+                            >Silently Abandoned (&ge; 18 months
+                            inactive)</strong
+                        >
+                    </td>
+                    <td>185</td>
+                    <td><strong>14.2%</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>At-Risk Packages</strong></td>
+                    <td>861</td>
+                    <td><strong>66.1%</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Healthy Packages</strong></td>
+                    <td>257</td>
+                    <td><strong>19.7%</strong></td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Packages with Known Vulnerabilities</strong>
+                    </td>
+                    <td>206</td>
+                    <td>15.8%</td>
+                </tr>
+            </tbody>
+        </table>
 
-<div class="table-title">TABLE I: High-Level Ecosystem Health Metrics</div>
-<table>
-  <thead>
-    <tr>
-      <th>Metric</th>
-      <th>Count</th>
-      <th>Percentage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Total Packages Investigated</strong></td><td>1,303</td><td>100.0%</td></tr>
-    <tr><td><strong>Total Dependency Relations Resolved</strong></td><td>3,022</td><td>—</td></tr>
-    <tr><td><strong>Single-Maintainer Packages</strong></td><td>989</td><td><strong>75.9%</strong></td></tr>
-    <tr><td><strong>Multi-Developer / Org-Backed Packages</strong></td><td>314</td><td>24.1%</td></tr>
-    <tr><td><strong>Silently Abandoned (&ge; 18 months inactive)</strong></td><td>185</td><td><strong>14.2%</strong></td></tr>
-    <tr><td><strong>At-Risk Packages</strong></td><td>861</td><td><strong>66.1%</strong></td></tr>
-    <tr><td><strong>Healthy Packages</strong></td><td>257</td><td><strong>19.7%</strong></td></tr>
-    <tr><td><strong>Packages with Known Vulnerabilities</strong></td><td>206</td><td>15.8%</td></tr>
-  </tbody>
-</table>
+        <div class="figure-box">
+            <img
+                src="../figures/fig1_maintainer_distribution.png"
+                alt="Figure 1: Maintainer Distribution"
+            />
+            <div class="figure-caption">
+                Figure 1: Single vs. Multi-Maintainer Dependency Proportion
+                (RQ1)
+            </div>
+        </div>
 
-<div class="figure-box">
-  <img src="../figures/fig1_maintainer_distribution.png" alt="Figure 1: Maintainer Distribution">
-  <div class="figure-caption">Figure 1: Single vs. Multi-Maintainer Dependency Proportion (RQ1)</div>
-</div>
+        <div class="callout">
+            <strong>Finding 1:</strong> Over three out of four packages (75.9%)
+            supporting the most critical Python systems depend on a single
+            maintainer, confirming an acute ecosystem-wide bus factor
+            bottleneck.
+        </div>
 
-<div class="callout">
-  <strong>Finding 1:</strong> Over three out of four packages (75.9%) supporting the most critical Python systems depend on a single maintainer, confirming an acute ecosystem-wide bus factor bottleneck.
-</div>
+        <div class="figure-box">
+            <img
+                src="../figures/fig2_health_distribution.png"
+                alt="Figure 2: Health Distribution"
+            />
+            <div class="figure-caption">
+                Figure 2: Dependency Health State Classification (RQ2)
+            </div>
+        </div>
 
-<div class="figure-box">
-  <img src="../figures/fig2_health_distribution.png" alt="Figure 2: Health Distribution">
-  <div class="figure-caption">Figure 2: Dependency Health State Classification (RQ2)</div>
-</div>
+        <div class="callout">
+            <strong>Finding 2:</strong> Nearly one out of every seven packages
+            (14.2%) in the critical dependency tree is silently abandoned, while
+            two-thirds (66.1%) exhibit high maintenance vulnerability.
+        </div>
 
-<div class="callout">
-  <strong>Finding 2:</strong> Nearly one out of every seven packages (14.2%) in the critical dependency tree is silently abandoned, while two-thirds (66.1%) exhibit high maintenance vulnerability.
-</div>
+        <h3>Statistical Association with Security Advisories (RQ3)</h3>
+        <p>
+            We conducted a Pearson's Chi-Square Test of Independence comparing
+            health status to vulnerability occurrence:
+        </p>
+        <p style="text-align: center; font-weight: bold; font-size: 16px">
+            &chi;<sup>2</sup> = 8.0513, &nbsp;&nbsp; <em>df</em> = 1,
+            &nbsp;&nbsp; <em>p</em> = 0.00455 &nbsp;&nbsp; (<em>p</em> &lt;
+            0.01)
+        </p>
 
-<h3>Statistical Association with Security Advisories (RQ3)</h3>
-<p>We conducted a Pearson's Chi-Square Test of Independence comparing health status to vulnerability occurrence:</p>
-<p style="text-align: center; font-weight: bold; font-size: 16px;">
-  &chi;<sup>2</sup> = 8.0513, &nbsp;&nbsp; <em>df</em> = 1, &nbsp;&nbsp; <em>p</em> = 0.00455 &nbsp;&nbsp; (<em>p</em> &lt; 0.01)
-</p>
+        <div class="figure-box">
+            <img
+                src="../figures/fig3_vulnerability_analysis.png"
+                alt="Figure 3: Vulnerability Analysis"
+            />
+            <div class="figure-caption">
+                Figure 3: Vulnerability Occurrence Across Dependency Health
+                Status (RQ3)
+            </div>
+        </div>
 
-<div class="figure-box">
-  <img src="../figures/fig3_vulnerability_analysis.png" alt="Figure 3: Vulnerability Analysis">
-  <div class="figure-caption">Figure 3: Vulnerability Occurrence Across Dependency Health Status (RQ3)</div>
-</div>
+        <div class="callout">
+            <strong>Finding 3 (The Reporting Blindspot):</strong> Logistic
+            regression (&beta; = -1.4901, <em>p</em> = 0.0037) reveals that
+            silently abandoned packages exhibit significantly lower rates of
+            logged CVEs not because they are safer, but because dormant
+            repositories lack active maintainers to review disclosure reports
+            and publish advisories.
+        </div>
 
-<div class="callout">
-  <strong>Finding 3 (The Reporting Blindspot):</strong> Logistic regression (&beta; = -1.4901, <em>p</em> = 0.0037) reveals that silently abandoned packages exhibit significantly lower rates of logged CVEs not because they are safer, but because dormant repositories lack active maintainers to review disclosure reports and publish advisories.
-</div>
+        <div class="figure-box">
+            <img
+                src="../figures/fig4_vuln_count_boxplot.png"
+                alt="Figure 4: Vulnerability Boxplot"
+            />
+            <div class="figure-caption">
+                Figure 4: Severity & Defect Distribution Across Health States
+            </div>
+        </div>
 
-<div class="figure-box">
-  <img src="../figures/fig4_vuln_count_boxplot.png" alt="Figure 4: Vulnerability Boxplot">
-  <div class="figure-caption">Figure 4: Severity & Defect Distribution Across Health States</div>
-</div>
+        <h2>IV. Practical Recommendations</h2>
+        <ol>
+            <li>
+                <strong>Software Practitioners:</strong> Transition beyond
+                surface-level dependency audits. Integrate Software Bill of
+                Materials (SBOM) and OpenSSF maintainer health scores into CI/CD
+                pipelines to monitor transitive dependencies.
+            </li>
+            <li>
+                <strong>PyPI Registry Governance:</strong> Introduce automated
+                dormancy warnings for libraries with no release activity in
+                &gt;18 months, and broaden PEP 541 maintainer succession
+                procedures.
+            </li>
+        </ol>
 
-<h2>IV. Practical Recommendations</h2>
-<ol>
-  <li><strong>Software Practitioners:</strong> Transition beyond surface-level dependency audits. Integrate Software Bill of Materials (SBOM) and OpenSSF maintainer health scores into CI/CD pipelines to monitor transitive dependencies.</li>
-  <li><strong>PyPI Registry Governance:</strong> Introduce automated dormancy warnings for libraries with no release activity in &gt;18 months, and broaden PEP 541 maintainer succession procedures.</li>
-</ol>
+        <h2>V. Conclusion</h2>
+        <p>
+            This empirical study quantified the prevalence of single-maintainer
+            dependencies (75.9%) and silent abandonment (14.2%) across PyPI's
+            most critical package trees. Our results highlight the systemic
+            vulnerabilities introduced by unmaintained code and the critical
+            need for proactive health monitoring across open-source supply
+            chains.
+        </p>
 
-<h2>V. Conclusion</h2>
-<p>This empirical study quantified the prevalence of single-maintainer dependencies (75.9%) and silent abandonment (14.2%) across PyPI's most critical package trees. Our results highlight the systemic vulnerabilities introduced by unmaintained code and the critical need for proactive health monitoring across open-source supply chains.</p>
-
-<h2>Data & Artifact Availability</h2>
-<p>All scripts, raw datasets, and generated figures are available at:</p>
-<ul>
-  <li>GitHub: <a href="https://github.com/raihan-sifat/pypi-dependency-health-study">https://github.com/raihan-sifat/pypi-dependency-health-study</a></li>
-  <li>Zenodo Archive: <a href="https://doi.org/10.5281/zenodo.XXXXXXX">https://doi.org/10.5281/zenodo.XXXXXXX</a></li>
-</ul>
-
-</body>
+        <h2>Data & Artifact Availability</h2>
+        <p>
+            All scripts, raw datasets, and generated figures are available at:
+        </p>
+        <ul>
+            <li>
+                GitHub:
+                <a
+                    href="https://github.com/raihan-sifat/pypi-dependency-health-study"
+                    >https://github.com/raihan-sifat/pypi-dependency-health-study</a
+                >
+            </li>
+            <li>
+                Zenodo Archive:
+                <a href="https://doi.org/10.5281/zenodo.XXXXXXX"
+                    >https://doi.org/10.5281/zenodo.XXXXXXX</a
+                >
+            </li>
+        </ul>
+    </body>
 </html>
