@@ -1,8 +1,8 @@
 # Silent Abandonment in the Python Ecosystem: An Empirical Study of Maintenance Risk in Critical PyPI Dependencies
 
 **Sifat Raihan**  
-Independent Researcher  
-Dhaka, Bangladesh  
+Hebei University of Science and Technology  
+Shijiazhuang, China  
 GitHub: [https://github.com/raihan-sifat](https://github.com/raihan-sifat)  
 Zenodo DOI: [10.5281/zenodo.23007343](https://doi.org/10.5281/zenodo.23007343)
 
