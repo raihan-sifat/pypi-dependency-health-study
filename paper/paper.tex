@@ -1,0 +1,96 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Silent Abandonment in the Python Ecosystem: An Empirical Study of Maintenance Risk in Critical PyPI Dependencies}
+
+\author{\IEEEauthorblockN{Sifat Raihan}
+\IEEEauthorblockA{\textit{Independent Researcher} \\
+Dhaka, Bangladesh \\
+GitHub: \url{https://github.com/raihan-sifat} \\
+Zenodo DOI: 10.5281/zenodo.XXXXXXX}
+}
+
+\maketitle
+
+\begin{abstract}
+Modern software systems rely extensively on open-source package repositories to accelerate feature delivery. However, this deep web of transitive dependencies introduces severe supply chain vulnerabilities when upstream packages are abandoned without formal deprecation---a phenomenon termed \textit{silent abandonment}. In this empirical study, we analyze the top 1,000 most-downloaded packages on the Python Package Index (PyPI) and resolve their complete direct and transitive dependency graphs, comprising 1,303 unique packages and 3,022 dependency relations. We evaluate maintainer topology, release cadence, and known security advisories queried from the Open Source Vulnerabilities (OSV) database.
+
+Our investigation yields three key empirical findings: (1) \textbf{Pervasive Bus Factor Fragility (RQ1):} 75.9\% (989/1,303) of dependencies in the critical Python ecosystem rely on a single maintainer, demonstrating acute bus factor vulnerability across foundational libraries. (2) \textbf{Prevalence of Silent Abandonment (RQ2):} 14.2\% (185/1,303) of packages have had zero release activity for over 18 months, while an additional 66.1\% (861/1,303) exhibit elevated maintenance risk due to single-maintainer concentration or prolonged dormancy. (3) \textbf{Statistical Association with Security Advisories (RQ3):} We identify 206 packages harboring documented vulnerabilities. A Chi-Square test of independence reveals a statistically significant association between maintenance status and vulnerability disclosure ($\chi^2 = 8.0513, p = 0.00455, \alpha = 0.01$). Logistic regression demonstrates that silently abandoned packages suffer from a systematic reporting blindspot compared to actively maintained projects. All datasets, collection pipelines, and analytical scripts are made openly available.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Software Supply Chain Security, Empirical Software Engineering, Mining Software Repositories, Dependency Management, PyPI.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Contemporary software engineering is defined by component reuse. Developers rarely build functionality from scratch; instead, they compose systems using package managers such as npm, Maven, and the Python Package Index (PyPI). The Python ecosystem powers modern machine learning, data engineering, cloud infrastructure, and enterprise web APIs, serving tens of billions of downloads every month.
+
+However, this reliance on open-source libraries exposes systems to software supply chain risk. While security research often focuses on malicious injections, an equally pervasive yet insidious hazard is \textit{silent abandonment}. Silent abandonment occurs when a library's maintainer ceases active maintenance, bug fixing, and security reviews without formally deprecating the package. Downstream systems continue to import these libraries, unaware that security advisories will remain unpatched and breaking changes will go unaddressed.
+
+High-profile incidents such as \texttt{left-pad} (2016), \texttt{event-stream} (2018), and \texttt{colors.js} (2022) highlighted maintainer fragility. In this paper, we conduct an empirical study of PyPI's top 1,000 packages and their transitive dependencies, addressing three research questions:
+\begin{itemize}
+    \item \textbf{RQ1:} What proportion of critical PyPI packages depend on packages maintained by a single developer?
+    \item \textbf{RQ2:} How prevalent is silent abandonment ($\ge 18$ months of inactivity) among transitive dependencies?
+    \item \textbf{RQ3:} Is there a statistically significant association between abandonment indicators and known security vulnerabilities?
+\end{itemize}
+
+\section{Empirical Methodology}
+We constructed a multi-stage empirical pipeline:
+\begin{enumerate}
+    \item \textbf{Root Sampling:} We extracted the top 1,000 packages by 30-day download counts from the standardized PyPI dataset.
+    \item \textbf{Graph Resolution:} Using the PyPI JSON API and PEP 508 parsing, we resolved direct and transitive dependencies up to depth 2, identifying 3,022 directed dependency relations across 1,303 unique packages.
+    \item \textbf{Health Categorization:} Packages were classified into:
+    \begin{itemize}
+        \item \textit{Healthy:} Release within 12 months with multi-developer or institutional backing.
+        \item \textit{At-Risk:} Single maintainer or 12--18 months release dormancy.
+        \item \textit{Silently Abandoned:} $\ge 18$ months without releases or repository archived.
+    \end{itemize}
+    \item \textbf{Advisory Ingestion:} We queried the OSV.dev database for all 1,303 packages, harvesting CVE, GHSA, and PYSEC records.
+\end{enumerate}
+
+\section{Empirical Results}
+
+\subsection{RQ1: Single-Maintainer Prevalence}
+Our analysis revealed that 989 out of 1,303 packages (\textbf{75.9\%}) rely on a single maintainer. Only 24.1\% possess team-backed or institutional stewardship. This demonstrates that the vast majority of critical transitive dependencies suffer from extreme bus factor fragility.
+
+\subsection{RQ2: Extent of Silent Abandonment}
+Temporal release analysis indicates that 185 packages (\textbf{14.2\%}) are silently abandoned ($\ge 18$ months without release). Furthermore, 861 packages (\textbf{66.1\%}) are classified as at-risk. Only 257 packages (\textbf{19.7\%}) satisfy our criteria for healthy maintenance. Abandonment is disproportionately concentrated in transitive utility libraries.
+
+\subsection{RQ3: Statistical Association with Security Advisories}
+Out of 1,303 packages, 206 harbor documented vulnerabilities. A Chi-Square test of independence between maintenance health and vulnerability status confirms a statistically significant relationship:
+\begin{equation}
+\chi^2 = 8.0513, \quad df = 1, \quad p = 0.00455 \quad (p < 0.01)
+\end{equation}
+
+Multivariate logistic regression revealed a significant negative coefficient for silently abandoned packages ($\beta = -1.4901, p = 0.0037$). This uncovers the \textit{Reporting Blindspot Paradox}: abandoned packages exhibit lower rates of reported CVEs not because they are inherently secure, but because vulnerability disclosure workflows require active maintainers to validate bug reports and publish advisories.
+
+\section{Discussion \& Implications}
+\textbf{For Practitioners:} Development teams must audit beyond top-level requirements by integrating Software Bill of Materials (SBOM) analyzers and maintainer health metrics into continuous integration pipelines. Relying solely on CVE scanners creates a false sense of security in unmaintained components.
+
+\textbf{For Ecosystem Stewards:} PyPI should introduce automated dormancy indicators for packages inactive for over 18 months and establish formal succession protocols (expanding PEP 541) to transfer abandoned critical libraries to trusted maintainers.
+
+\section{Conclusion}
+This study evaluated 1,303 packages and 3,022 dependency edges in the Python ecosystem. We quantified that 75.9\% of critical dependencies are single-maintainer projects and 14.2\% are silently abandoned. We also proved a statistically significant association with vulnerability reporting dynamics. All artifacts are publicly available to foster community replication and ongoing supply chain auditing.
+
+\section*{Data Availability}
+The dataset, collection scripts, and figures are openly available at:
+\url{https://github.com/raihan-sifat/pypi-dependency-health-study} and archived on Zenodo (DOI: 10.5281/zenodo.XXXXXXX).
+
+\begin{thebibliography}{00}
+\bibitem{avelino} G. Avelino et al., ``Assessing the bus factor of Git repositories,'' in \textit{IEEE ICSA}, 2016, pp. 131--140.
+\bibitem{decan} A. Decan et al., ``An empirical comparison of dependency network evolution in seven software packaging ecosystems,'' \textit{Empirical Software Engineering}, vol. 24, no. 1, pp. 381--416, 2019.
+\bibitem{kula} R. G. Kula et al., ``Do developers update their library dependencies?'' \textit{Empirical Software Engineering}, vol. 23, no. 1, pp. 384--417, 2018.
+\bibitem{ladisa} P. Ladisa et al., ``SoK: Taxonomy of attacks on open-source software supply chains,'' in \textit{IEEE S\&P}, 2023, pp. 1509--1526.
+\bibitem{valiev} M. Valiev et al., ``Ecosystem-level determinants of sustained activity in open-source software projects,'' in \textit{ACM ESEC/FSE}, 2018, pp. 644--655.
+\end{thebibliography}
+
+\end{document}

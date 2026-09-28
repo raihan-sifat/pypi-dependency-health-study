@@ -1,0 +1,11 @@
+Metric,Value
+Total Packages Analysed,1303
+Direct and Transitive Dependencies,3022
+Single-Maintainer Packages,989 (75.9%)
+Silently Abandoned (>=18 mo inactive),185 (14.2%)
+At-Risk (12-18 mo or single maintainer),861 (66.08%)
+Healthy Maintenance State,257 (19.72%)
+Packages with Known Vulnerabilities,206 (15.8%)
+Chi-Square Test (Abandonment vs Vuln),8.0513
+p-value,4.55e-03
+Odds Ratio,0.60
