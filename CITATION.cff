@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+title: "Silent Abandonment in the Python Ecosystem: An Empirical Study of Maintenance Risk in Critical PyPI Dependencies"
+message: "If you use this dataset, analysis code, or manuscript, please cite it using the metadata below."
+type: software
+authors:
+  - given-names: Sifat
+    family-names: Raihan
+    alias: raihan-sifat
+    affiliation: "Hebei University of Science and Technology"
+# Add your ORCID below if you have one, e.g.
+#   orcid: "https://orcid.org/0000-0000-0000-0000"
+repository-code: "https://github.com/raihan-sifat/pypi-dependency-health-study"
+url: "https://doi.org/10.5281/zenodo.23007343"
+doi: "10.5281/zenodo.23007343"
+abstract: >-
+  An empirical study of maintenance risk in the Python package ecosystem. The
+  study analyses the top 1,000 most-downloaded PyPI packages and their
+  transitive dependency trees (1,303 unique packages, 3,022 dependency
+  edges) to quantify single-maintainer prevalence, rates of silent
+  abandonment (>= 18 months of inactivity), and the statistical association
+  between maintenance inactivity and known security advisories in the
+  OSV.dev database.
+keywords:
+  - pypi
+  - dependency-health
+  - bus-factor
+  - single-maintainer
+  - software-supply-chain
+  - open-source-maintenance
+  - abandoned-packages
+  - vulnerability-disclosure
+  - empirical-software-engineering
+  - cs.SE
+  - cs.CR
+license: MIT
+version: "1.0.0"
+date-released: "2026-09-28"
