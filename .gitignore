@@ -1,7 +1,13 @@
 # Python
+# NOTE: rules below are also matched in nested dirs (e.g. scripts/__pycache__/).
+# Already-tracked files must be untracked with `git rm --cached` to take effect.
 __pycache__/
 *.py[cod]
+*.pyo
 *.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .venv/
 venv/
 env/
@@ -24,4 +30,7 @@ Thumbs.db
 # Uncomment if you don't want to commit data to git:
 # data/*.csv
 # data/*.parquet
+
+# Internal working notes / review critique (never published)
+issues.md
 
